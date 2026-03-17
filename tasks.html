@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Task Manager</title>
+
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+    background: #f2f2f2;
+}
+.container {
+    background: white;
+    padding: 20px;
+    width: 300px;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 10px;
+}
+input {
+    padding: 8px;
+    width: 70%;
+}
+button {
+    padding: 8px;
+    margin: 5px;
+    background: blue;
+    color: white;
+    border: none;
+}
+li {
+    margin: 10px 0;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Task Manager</h2>
+
+    <input type="text" id="taskInput">
+    <button onclick="addTask()">Add</button>
+
+    <ul id="taskList"></ul>
+</div>
+
+<script>
+let tasks = [];
+
+function showTasks() {
+    let list = document.getElementById("taskList");
+    list.innerHTML = "";
+
+    tasks.forEach((task, index) => {
+        list.innerHTML += `<li>${task} 
+        <button onclick="deleteTask(${index})">Delete</button>
+        <button onclick="updateTask(${index})">Edit</button>
+        </li>`;
+    });
+}
+
+function addTask() {
+    let task = document.getElementById("taskInput").value;
+    tasks.push(task);
+    document.getElementById("taskInput").value = "";
+    showTasks();
+}
+
+function deleteTask(index) {
+    tasks.splice(index, 1);
+    showTasks();
+}
+
+function updateTask(index) {
+    let newTask = prompt("Update task:");
+    tasks[index] = newTask;
+    showTasks();
+}
+</script>
+
+</body>
+</html>
